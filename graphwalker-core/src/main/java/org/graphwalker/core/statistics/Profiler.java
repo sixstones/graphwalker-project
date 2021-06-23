@@ -55,6 +55,11 @@ public interface Profiler {
   List<Element> getVisitedVertices(Context context);
   boolean isVisited(Context context, Element element);
   List<Execution> getExecutionPath();
+
+  List<Execution> getCaseExecution();
+
+  void resetCaseExecution();
+
   long getTotalExecutionTime();
   long getTotalExecutionTime(TimeUnit unit);
   List<Profile> getProfiles();

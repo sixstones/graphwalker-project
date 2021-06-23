@@ -159,6 +159,7 @@ public final class JsonContextFactory implements ContextFactory {
       for (Element element : context.getModel().getElements()) {
         if (element.getId().equals(jsonModel.getStartElementId())) {
           context.setNextElement(element);
+          context.setStartElement(element);
           break;
         }
       }

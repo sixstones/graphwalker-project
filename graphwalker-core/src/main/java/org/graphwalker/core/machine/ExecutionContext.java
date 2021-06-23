@@ -68,6 +68,7 @@ public abstract class ExecutionContext extends SimpleScriptContext implements Co
   private Element currentElement;
   private Element nextElement;
   private Element lastElement;
+  private Element startElement;
 
   private final Map<Class<? extends Algorithm>, Object> algorithms = new HashMap<>();
 
@@ -189,6 +190,20 @@ public abstract class ExecutionContext extends SimpleScriptContext implements Co
     this.currentElement = element;
     this.nextElement = null;
     return this;
+  }
+
+  public Context setStartElement(Element element){
+    this.startElement = element;
+    return this;
+  }
+
+  public Context restart(){
+    this.currentElement = this.startElement;
+    return this;
+  }
+
+  public Element getStartElement(){
+    return startElement;
   }
 
   public Element getNextElement() {

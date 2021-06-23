@@ -46,6 +46,8 @@ public class SimpleProfiler implements Profiler {
   private final Map<Context, Map<Element, List<Execution>>> executions = new HashMap<>();
   private final List<Execution> executionPath = new ArrayList<>();
 
+  private List<Execution> caseExecution = new ArrayList<>();
+
   @Override
   public void addContext(Context context) {
     if (!executions.containsKey(context)) {
@@ -75,6 +77,7 @@ public class SimpleProfiler implements Profiler {
     Execution execution = new Execution(context, context.getCurrentElement(), startTime, stopTime - startTime);
     executionPath.add(execution);
     executions.get(context).get(context.getCurrentElement()).add(execution);
+    caseExecution.add(execution);
   }
 
   @Override
@@ -177,6 +180,16 @@ public class SimpleProfiler implements Profiler {
   @Override
   public List<Execution> getExecutionPath() {
     return executionPath;
+  }
+
+  @Override
+  public List<Execution> getCaseExecution() {
+    return caseExecution;
+  }
+
+  @Override
+  public void resetCaseExecution() {
+    this.caseExecution.clear();
   }
 
   @Override

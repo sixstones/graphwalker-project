@@ -75,4 +75,11 @@ public class Execution {
   public long getDuration() {
     return duration;
   }
+
+  @Override
+  public String toString() {
+    return "Execution{" +
+      "element=" + element.getName() +
+      '}';
+  }
 }

@@ -139,7 +139,13 @@ public class SimpleMachine extends MachineBase {
       if (ExecutionStatus.NOT_EXECUTED.equals(context.getExecutionStatus())) {
         context.setExecutionStatus(ExecutionStatus.EXECUTING);
       }
-    } catch (Throwable t) {
+    }catch (NoPathFoundException e){
+      LOG.debug("用例 = {}",context.getProfiler().getCaseExecution().toString());
+      context.restart();
+      context.getProfiler().resetCaseExecution();
+
+    }
+    catch (Throwable t) {
       LOG.error(t.getMessage());
       getExceptionStrategy().handle(this, new MachineException(context, t));
     }
@@ -253,6 +259,9 @@ public class SimpleMachine extends MachineBase {
           switchContext(context);
         }
         return true;
+      }else {
+        //无后续步步骤,打印用例
+        LOG.debug("用例 = {}",context.getProfiler().getCaseExecution().toString());
       }
     }
     return false;

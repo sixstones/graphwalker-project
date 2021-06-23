@@ -71,6 +71,12 @@ public interface Context {
 
   Context setCurrentElement(Element element);
 
+  Element getStartElement();
+
+  Context setStartElement(Element element);
+
+  Context restart();
+
   Element getNextElement();
 
   Context setNextElement(Builder<? extends Element> nextElement);
